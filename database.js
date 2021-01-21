@@ -66,18 +66,17 @@ const productList = [
 ]
 
 
-let databaseInclude=productList.map((product)=>{
-    
-    return` <div class="shop-item">
+let databaseinclude=productList.map((product)=>{
+
+    return`  <div class="shop-item">
     <span class="shop-item-title">${product.productName}</span>
     <img class="shop-item-image" src="${product.productImage}">
-    <div class="item-item-details">
+    <div class="shop-item-details">
         <span class="shop-item-price">${product.price}</span>
-        <button class="btn btn-primary shop-item-button" type="button">ADD</button>
-        </div>
-    </div>`
-
+        <button class="btn btn-primary shop-item-button" type="button">BUY</button>
+    </div>
+</div>`
 }).join("")
-document.querySelector("#databaseInclude").innerHTML=databaseInclude; 
+document.querySelector("#databaseinclude").innerHTML=databaseinclude;
 
 
