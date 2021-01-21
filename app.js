@@ -43,7 +43,6 @@ function quantityChanged(event) {
 
 }
 
-// ************bu kisim sepete ekleme eventi functionu
 function addToClicked(event) {
     let shopItem = event.target.parentElement.parentElement
     let title = shopItem.getElementsByClassName("shop-item-title")[0].innerText
@@ -52,23 +51,23 @@ function addToClicked(event) {
     addToBox(title, price, imageSrc)
 }
 
-
-function addToBox(title,price,imageSrc) {
-    let boxRow=document.createElement("")
+//bu function sepete eklenen urunu sepete yazdirmak icin html kodlarini barindiriyor
+function addToBox(title, price, imageSrc) {
+    let boxRow = document.createElement("div")
     boxRow.classList.add("cart-row")
-    let cartItems=document.getElementsByClassName("cart-items")
+    let cartItems = document.getElementsByClassName("cart-items")[0]
 
-let footItemNames=cardItems.getElementsByClassName("card-items-title")
-for (let index = 0; index < footItemNames.length; index++) {
-    if (footItemNames)[index].innerText==title {
-        alert("this food already in your box")
-        return
-        
+
+    let footItemNames = cartItems.getElementsByClassName("cart-item-title")
+    for (let i = 0; i < footItemNames.length; i++) {
+        if (footItemNames[i].innerText == title) {
+            alert("this food is alredy box")
+            return
+        }
     }
-    
-}
 
-let cartRowConnents = ` <div class="cart-item cart-column">
+
+    let cartRowConnents = ` <div class="cart-item cart-column">
 <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
 <span class="cart-item-title">${title}</span>
 </div>
@@ -83,8 +82,7 @@ let cartRowConnents = ` <div class="cart-item cart-column">
     boxRow.getElementsByClassName("cart-quantity-input")[0].addEventListener("change", quantityChanged)
 
 }
-
-
+//bu function total fiyati degistirmek icindir
 function updateBoxPriceTotal() {
     let cartItemContainer = document.getElementsByClassName("cart-items")[0].getElementsByClassName("cart-row")
     let total = 0
