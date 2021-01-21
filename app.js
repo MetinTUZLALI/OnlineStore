@@ -1,37 +1,31 @@
 
 
 
-if (document.readyState=="loading"){
-    document.addEventListener("DOMContentLoaded", loadReady)
-} else{loadReady}
+if (document.readyState == "loading") {
+    document.addEventListener("DOMContentloaded", loadReady)
 
-
+} else {
+    loadReady()
+}
+//dinleme eventlerini bir function icine aldik
 function loadReady() {
+    // ************ Urünü Sepetten silmek Icin eventleri dinliyor
+    let removeBoxItmes = document.getElementsByClassName("btn-danger")
+    for (let i = 0; i < removeBoxItmes.length; i++) {
+        removeBoxItmes[i].addEventListener("click", removeItems)
+    }
+    // ************ inputtaki adet degisikligi eventi
+    let quantityInputs = document.getElementsByClassName("cart-quantity-input")
+    for (let i = 0; i < quantityInputs.length; i++) {
+        quantityInputs[i].addEventListener("change", quantityChanged)
+    }
 
-//************
-let removeBoxItems=document.getElementsByClassName("btn-danger")
-for (let index = 0; index < removeBoxItems.length; index++) {
-    removeBoxItems[index].addEventListener("click", removeItems);
-    
-}
-
-
-//***********   
-let quantityInputs=document.getElementsByClassName("cart-quantity-input")
-for (let index = 0; index < quantityInputs.length; index++) {
-   quantityInputs[index].addEventListener("change", quantityChanged)
-    
-}  
-
-//************    
-
-
-let addToBuyButtons = document.getElementsByClassName("shop-item-button")
-
-for (let index = 0; index < addToBuyButtons.length; index++) {
-
-addToBuyButtons[index].addEventListener("click", addToClicked)    
-}
+    // ************bu kisim sepete ekleme eventi
+    let addToBuyButtons = document.getElementsByClassName("shop-item-button")
+    for (let i = 0; i < addToBuyButtons.length; i++) {
+        addToBuyButtons[i].addEventListener("click", addToClicked)
+    }
+ 
 }
 
 
