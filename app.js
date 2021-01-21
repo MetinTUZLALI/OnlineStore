@@ -33,25 +33,25 @@ function removeItems(event) {
     event.target.parentElement.parentElement.remove()
     updateBoxPriceTotal()
 }
+// ************ inputtaki adet degisikligi eventi functionu
 function quantityChanged(event) {
-    let input=event.target
-    if (isNaN(input.value) || input.value <=0) {
-       input.value=1 
+    let input = event.target
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1
     }
-    updateBoxPriceTotal()    
-    
+    updateBoxPriceTotal()
+
 }
 
-
-
+// ************bu kisim sepete ekleme eventi functionu
 function addToClicked(event) {
-    let shopItem=event.target.parentElement.parentElement
-    let title=shopItem.getElementsByClassName("shop-item-title").innerText
-    let price=shopItem.getElementsByClassName("shop-item-price").innerText
-    let imageSrc=shopItem.getElementsByClassName("shop-item-image").src
-
-    addToBox(title,price,imageSrc)
+    let shopItem = event.target.parentElement.parentElement
+    let title = shopItem.getElementsByClassName("shop-item-title")[0].innerText
+    let price = shopItem.getElementsByClassName("shop-item-price")[0].innerText
+    let imageSrc = shopItem.getElementsByClassName("shop-item-image")[0].src
+    addToBox(title, price, imageSrc)
 }
+
 
 function addToBox(title,price,imageSrc) {
     let boxRow=document.createElement("")
@@ -60,7 +60,7 @@ function addToBox(title,price,imageSrc) {
 
 let footItemNames=cardItems.getElementsByClassName("card-items-title")
 for (let index = 0; index < footItemNames.length; index++) {
-    if (footItemNames[index]).innerText==title {
+    if (footItemNames)[index].innerText==title {
         alert("this food already in your box")
         return
         
@@ -68,34 +68,34 @@ for (let index = 0; index < footItemNames.length; index++) {
     
 }
 
-    let cartRowConntents` <div class="cart-item cart-column">
-    <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
-    <span class="cart-item-title">${title}</span>
+let cartRowConnents = ` <div class="cart-item cart-column">
+<img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+<span class="cart-item-title">${title}</span>
 </div>
-<span class="cart-price cart-column">${price}</span>
+<span class="cart-price cart-column">${price} </span>
 <div class="cart-quantity cart-column">
-    <input class="cart-quantity-input" type="number" value="1">
-    <button class="btn btn-danger" type="button">REMOVE</button>
+<input class="cart-quantity-input" type="number" value="1">
+<button class="btn btn-danger" type="button">REMOVE</button>
 </div>`
+    boxRow.innerHTML = cartRowConnents
+    cartItems.append(boxRow)
+    boxRow.getElementsByClassName("btn-danger")[0].addEventListener("click", removeItems)
+    boxRow.getElementsByClassName("cart-quantity-input")[0].addEventListener("change", quantityChanged)
 
-boxRow.innerHTML=cartRowConntents
-cardItems.append(boxRow)
-boxRow.getElementsByClassName("btn-danger").addEventListener("click", removeItems)
-boxRow.getElementsByClassName("cart-quantity-input").addEventListener("change",quantityChanged)
 }
 
 
 function updateBoxPriceTotal() {
-    let cartItemContainer=document.getElementsByClassName("card-items").getElementsByClassName("card-row")
+    let cartItemContainer = document.getElementsByClassName("cart-items")[0].getElementsByClassName("cart-row")
     let total = 0
-    for (let index = 0; index < cartItemContainer.length; index++) {
-        const cartRow = cartItemContainer[index];
-        let priceElement=cartRow.getElementsByClassName("cart-price")[0]
-        let quantityElement=cartRow.getElementsByClassName("cart-quantity-input")
-        let price=parseFloat(priceElement.innerText.replace("fr","")
-        let quantity=quantityElement.value
-        total=total+(price*quantity)
+    for (let i = 0; i < cartItemContainer.length; i++) {
+        let cartRow = cartItemContainer[i]
+        let priceElement = cartRow.getElementsByClassName("cart-price")[0]
+        let quantityElement = cartRow.getElementsByClassName("cart-quantity-input")[0]
+        let price = parseFloat(priceElement.innerText.replace("fr", ""))
+        let quantity = quantityElement.value
+        total = total + (price * quantity)
     }
-    total=Math.round(total*100)/100
-    document.getElementsByClassName("cart-total-price").innerText=total + " fr"
+    total = Math.round(total * 100) / 100
+    document.getElementsByClassName("cart-total-price")[0].innerText = total + " fr"
 }
